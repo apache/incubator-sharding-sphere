@@ -54,7 +54,7 @@ public final class AllPrivilegesPermittedAuthorityProviderAlgorithm implements A
         return "ALL_PRIVILEGES_PERMITTED";
     }
     
-    private static class AllPrivilegesPermittedShardingSpherePrivileges implements ShardingSpherePrivileges {
+    private static final class AllPrivilegesPermittedShardingSpherePrivileges implements ShardingSpherePrivileges {
     
         @Override
         public void setSuperPrivilege() {
