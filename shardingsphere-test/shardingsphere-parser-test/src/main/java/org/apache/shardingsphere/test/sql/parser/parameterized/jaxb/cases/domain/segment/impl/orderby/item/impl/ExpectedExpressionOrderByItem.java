@@ -19,9 +19,11 @@ package org.apache.shardingsphere.test.sql.parser.parameterized.jaxb.cases.domai
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.shardingsphere.test.sql.parser.parameterized.jaxb.cases.domain.segment.impl.expr.ExpectedExpression;
 import org.apache.shardingsphere.test.sql.parser.parameterized.jaxb.cases.domain.segment.impl.orderby.item.ExpectedOrderByItem;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Expected expression order by item.
@@ -32,4 +34,7 @@ public final class ExpectedExpressionOrderByItem extends ExpectedOrderByItem {
     
     @XmlAttribute
     private String expression;
+
+    @XmlElement(name = "expr")
+    private ExpectedExpression expr;
 }

@@ -34,4 +34,5 @@
     <sql-case id="select_order_by_with_table_star_table_name" value="SELECT t_order.* FROM t_order ORDER BY t_order.order_id" db-types="H2,MySQL" />
     <sql-case id="select_order_by_with_star_no_table_alias" value="SELECT * FROM t_order ORDER BY order_id" db-types="H2,MySQL" />
     <sql-case id="select_order_by_with_table_star_without_table_name" value="SELECT i.*, o.* FROM t_order o JOIN t_order_item i ON o.user_id = i.user_id AND o.order_id = i.order_id ORDER BY item_id" db-types="H2,MySQL" />
+    <sql-case id="select_order_by_expression_binary_operation" value="select * from t_order order by 1+1" db-types="MySQL"/>
 </sql-cases>

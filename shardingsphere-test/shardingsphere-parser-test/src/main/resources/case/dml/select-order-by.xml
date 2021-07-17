@@ -376,4 +376,28 @@
             <column-item name="item_id" start-index="113" stop-index="119" />
         </order-by>
     </select>
+
+    <select sql-case-id="select_order_by_expression_binary_operation">
+        <projections start-index="7" stop-index="7">
+            <shorthand-projection start-index="7" stop-index="7"/>
+        </projections>
+        <from>
+            <simple-table name="t_order" start-index="14" stop-index="20" />
+        </from>
+        <order-by>
+            <expression-item expression="1+1" start-index="31" stop-index="33">
+                <expr>
+                    <binary-operation-expression start-index="31" stop-index="33">
+                        <left>
+                            <literal-expression value="1" start-index="31" stop-index="31"/>
+                        </left>
+                        <right>
+                            <literal-expression value="1" start-index="33" stop-index="33"/>
+                        </right>
+                        <operator>+</operator>
+                    </binary-operation-expression>
+                </expr>
+            </expression-item>
+        </order-by>
+    </select>
 </sql-parser-test-cases>

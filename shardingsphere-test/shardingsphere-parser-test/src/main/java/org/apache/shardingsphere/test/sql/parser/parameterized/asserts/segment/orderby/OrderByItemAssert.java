@@ -21,6 +21,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.shardingsphere.test.sql.parser.parameterized.asserts.SQLCaseAssertContext;
 import org.apache.shardingsphere.test.sql.parser.parameterized.asserts.segment.SQLSegmentAssert;
+import org.apache.shardingsphere.test.sql.parser.parameterized.asserts.segment.expression.ExpressionAssert;
 import org.apache.shardingsphere.test.sql.parser.parameterized.asserts.segment.owner.OwnerAssert;
 import org.apache.shardingsphere.test.sql.parser.parameterized.asserts.value.IdentifierValueAssert;
 import org.apache.shardingsphere.test.sql.parser.parameterized.jaxb.cases.domain.segment.impl.orderby.ExpectedOrderByClause;
@@ -78,6 +79,9 @@ public final class OrderByItemAssert {
             if (each instanceof ExpressionOrderByItemSegment) {
                 assertOrderInfo(assertContext, each, expected.getExpressionItems().get(count), type);
                 assertExpressionOrderByItem(assertContext, (ExpressionOrderByItemSegment) each, expected.getExpressionItems().get(count), type);
+                if (null != ((ExpressionOrderByItemSegment) each).getExpr() && null != expected.getExpressionItems().get(count).getExpr()) {
+                    ExpressionAssert.assertExpression(assertContext, ((ExpressionOrderByItemSegment) each).getExpr(), expected.getExpressionItems().get(count).getExpr());
+                }
                 count++;
             }
         }
