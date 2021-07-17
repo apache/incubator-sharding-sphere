@@ -151,6 +151,14 @@ indexTypeName
     : (owner DOT_)? name
     ;
 
+modelName
+    : (owner DOT_)? name
+    ;
+
+operatorName
+    : (owner DOT_)? name
+    ;
+
 constraintName
     : identifier
     ;

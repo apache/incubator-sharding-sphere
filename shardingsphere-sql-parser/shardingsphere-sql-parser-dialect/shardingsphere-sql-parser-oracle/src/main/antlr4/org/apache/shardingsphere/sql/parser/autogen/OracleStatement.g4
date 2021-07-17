@@ -56,5 +56,6 @@ execute
     | disassociateStatistics
     | audit
     | noAudit
+    | comment
     ) SEMI_?
     ;

@@ -1880,3 +1880,16 @@ contextClause
 contextNamespaceAttributesClause
     : CONTEXT NAMESPACE namespace ATTRIBUTES attributeName (COMMA_ attributeName)*
     ;
+
+comment
+    : COMMENT ON (
+    | AUDIT POLICY policyName
+    | COLUMN (tableName | viewName | materializedViewName) DOT_ columnName
+    | EDITION editionName
+    | INDEXTYPE indexTypeName
+    | MATERIALIZED VIEW materializedViewName
+    | MINING MODEL modelName
+    | OPERATOR operatorName
+    | TABLE (tableName | viewName)
+    ) IS STRING_
+    ;

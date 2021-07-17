@@ -137,6 +137,8 @@ public enum SQLVisitorRule {
     AUDIT("Audit", SQLStatementType.DDL),
     
     NOAUDIT("NoAudit", SQLStatementType.DDL),
+
+    COMMENT("Comment", SQLStatementType.DDL),
     
     SET_CONSTRAINTS("SetConstraints", SQLStatementType.TCL),
     

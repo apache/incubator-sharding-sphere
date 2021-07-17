@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one or more
+  ~ contributor license agreements.  See the NOTICE file distributed with
+  ~ this work for additional information regarding copyright ownership.
+  ~ The ASF licenses this file to You under the Apache License, Version 2.0
+  ~ (the "License"); you may not use this file except in compliance with
+  ~ the License.  You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<sql-cases>
+    <sql-case id="comment_on_policy" value="COMMENT ON AUDIT POLICY read_dir_pol IS 'this is a default policy'" db-types="Oracle" />
+    <sql-case id="comment_on_column" value="COMMENT ON COLUMN employees.job_id IS 'abbreviated job title'" db-types="Oracle" />
+    <sql-case id="comment_on_edition" value="COMMENT ON EDITION editionName IS 'some comments'" db-types="Oracle" />
+    <sql-case id="comment_on_indextype" value="COMMENT ON INDEXTYPE indtype IS 'some comments'" db-types="Oracle" />
+    <sql-case id="comment_on_view" value="COMMENT ON MATERIALIZED VIEW viewName IS 'some comments'" db-types="Oracle" />
+    <sql-case id="comment_on_model" value="COMMENT ON MINING MODEL modelName IS 'some comments'" db-types="Oracle" />
+    <sql-case id="comment_on_operator" value="COMMENT ON OPERATOR op IS 'some comments'" db-types="Oracle" />
+    <sql-case id="comment_on_table" value="COMMENT ON TABLE employees IS 'some comments'" db-types="Oracle" />
+</sql-cases>
