@@ -90,4 +90,5 @@
     <sql-case id="select_with_binding_tables_without_join" value="SELECT last_name, job_id, departments.department_id, department_name FROM employees, departments WHERE employees.department_id = departments.department_id ORDER BY last_name, job_id" db-types="Oracle" />
     <sql-case id="select_with_lateral_clause" value="SELECT * FROM employees e, LATERAL(SELECT * FROM departments d WHERE e.department_id = d.department_id)" db-types="Oracle" />
     <sql-case id="select_with_containers" value="SELECT * FROM CONTAINERS(employees)" db-types="Oracle" />
+    <sql-case id="select_with_hierarchical_connect_by" value="SELECT last_name, employee_id, manager_id FROM employees CONNECT BY employee_id = manager_id ORDER BY last_name" db-types="Oracle" />
 </sql-cases>

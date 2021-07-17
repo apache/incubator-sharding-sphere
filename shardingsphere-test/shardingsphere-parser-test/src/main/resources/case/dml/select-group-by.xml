@@ -390,4 +390,199 @@
         </having>
         <window start-index="102" stop-index="135" />
     </select>
+
+    <select sql-case-id="select_group_by_cube">
+        <from>
+            <join-table>
+                <left>
+                    <simple-table name="employees" alias="e" start-index="218" stop-index="228" />
+                </left>
+                <right>
+                    <simple-table name="departments" alias="d" start-index="231" stop-index="243" />
+                </right>
+            </join-table>
+        </from>
+        <projections start-index="7" stop-index="211">
+            <expression-projection text="DECODE(GROUPING(department_name), 1, 'All Departments', department_name)" alias="department_name" start-index="7" stop-index="97" />
+            <expression-projection text="DECODE(GROUPING(job_id), 1, 'All Jobs', job_id)" alias="job_id" start-index="100" stop-index="156" />
+            <aggregation-projection type="COUNT" alias="Total Empl" inner-expression="(*)" start-index="159" stop-index="166" />
+            <expression-projection text="AVG(salary) * 12" alias="Average Sal" start-index="182" stop-index="211" />
+        </projections>
+        <where start-index="245" stop-index="283">
+            <expr>
+                <binary-operation-expression start-index="251" stop-index="283">
+                    <left>
+                        <column name="department_id" start-index="251" stop-index="265">
+                            <owner name="d" start-index="251" stop-index="251" />
+                        </column>
+                    </left>
+                    <operator>=</operator>
+                    <right>
+                        <column name="department_id" start-index="269" stop-index="283">
+                            <owner name="e" start-index="269" stop-index="269" />
+                        </column>
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </where>
+        <group-by>
+            <column-item name="department_name" start-index="300" stop-index="314" />
+            <column-item name="job_id" start-index="317" stop-index="322" />
+        </group-by>
+        <order-by>
+            <column-item name="department_name" start-index="334" stop-index="348" />
+            <column-item name="job_id" start-index="351" stop-index="356" />
+        </order-by>
+    </select>
+
+    <select sql-case-id="select_group_by_grouping_sets">
+        <from>
+            <join-table>
+                <left>
+                    <join-table>
+                        <left>
+                            <join-table>
+                                <left>
+                                    <join-table>
+                                        <left>
+                                            <simple-table name="sales" start-index="113" stop-index="117" />
+                                        </left>
+                                        <right>
+                                            <simple-table name="customers" start-index="120" stop-index="128" />
+                                        </right>
+                                    </join-table>
+                                </left>
+                                <right>
+                                    <simple-table name="times" start-index="131" stop-index="135" />
+                                </right>
+                            </join-table>
+                        </left>
+                        <right>
+                            <simple-table name="channels" start-index="138" stop-index="145" />
+                        </right>
+                    </join-table>
+                </left>
+                <right>
+                    <simple-table name="countries" alias="co" start-index="148" stop-index="159" />
+                </right>
+            </join-table>
+        </from>
+        <projections start-index="7" stop-index="106">
+            <column-projection name="channel_desc" start-index="7" stop-index="18" />
+            <column-projection name="calendar_month_desc" start-index="21" stop-index="39" />
+            <column-projection name="country_id" start-index="42" stop-index="54">
+                <owner name="co" start-index="42" stop-index="43" />
+            </column-projection>
+            <expression-projection text="TO_CHAR(SUM(amount_sold) , '9,999,999,999')" alias="SALES$" start-index="57" stop-index="106" />
+        </projections>
+        <where start-index="161" stop-index="193">
+            <expr>
+                <binary-operation-expression start-index="167" stop-index="193">
+                    <left>
+                        <column name="time_id" start-index="167" stop-index="179">
+                            <owner name="sales" start-index="167" stop-index="171" />
+                        </column>
+                    </left>
+                    <operator>=</operator>
+                    <right>
+                        <column name="time_id" start-index="181" stop-index="193">
+                            <owner name="times" start-index="181" stop-index="185" />
+                        </column>
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </where>
+        <group-by>
+            <expression-item expression="(channel_desc,calendar_month_desc,co.country_id)" start-index="218" stop-index="265" />
+            <expression-item expression="(channel_desc,co.country_id)" start-index="268" stop-index="295" />
+            <expression-item expression="(calendar_month_desc,co.country_id)" start-index="298" stop-index="332" />
+        </group-by>
+    </select>
+
+    <select sql-case-id="select_group_by_with_having_with_order_by">
+        <from>
+            <simple-table name="employees" start-index="52" stop-index="60" />
+        </from>
+        <projections start-index="7" stop-index="45">
+            <column-projection name="department_id" start-index="7" stop-index="19" />
+            <aggregation-projection type="MIN" inner-expression="(salary)" start-index="22" stop-index="32" />
+            <aggregation-projection type="MAX" inner-expression="(salary)" start-index="35" stop-index="45" />
+        </projections>
+        <group-by>
+            <column-item name="department_id" start-index="71" stop-index="83" />
+        </group-by>
+        <having start-index="85" stop-index="109">
+            <expr>
+                <binary-operation-expression start-index="92" stop-index="109">
+                    <left>
+                        <aggregation-projection type="MIN" inner-expression="(salary)" start-index="92" stop-index="102" />
+                    </left>
+                    <operator>&lt;</operator>
+                    <right>
+                        <literal-expression value="5000" start-index="106" stop-index="109"/>
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </having>
+        <order-by>
+            <column-item name="department_id" start-index="120" stop-index="132" />
+        </order-by>
+    </select>
+
+    <select sql-case-id="select_group_by_with_having_with_subquery">
+        <from>
+            <simple-table name="employees" start-index="38" stop-index="46" />
+        </from>
+        <projections start-index="7" stop-index="31">
+            <column-projection name="department_id" start-index="7" stop-index="19" />
+            <column-projection name="manager_id" start-index="22" stop-index="31" />
+        </projections>
+        <group-by>
+            <column-item name="department_id" start-index="57" stop-index="69" />
+            <column-item name="manager_id" start-index="72" stop-index="81" />
+        </group-by>
+        <having start-index="83" stop-index="219">
+            <expr>
+                <in-expression start-index="90" stop-index="219">
+                    <not>false</not>
+                    <left>
+                        <common-expression text="(department_id,manager_id)" start-index="90" stop-index="116" />
+                    </left>
+                    <right>
+                        <subquery start-index="121" stop-index="219">
+                            <select>
+                                <from start-index="160" stop-index="170">
+                                    <simple-table name="employees" alias="x" start-index="160" stop-index="170"/>
+                                </from>
+                                <projections start-index="129" stop-index="153">
+                                    <column-projection name="department_id" start-index="129" stop-index="141"/>
+                                    <column-projection name="manager_id" start-index="144" stop-index="153"/>
+                                </projections>
+                                <where start-index="172" stop-index="218">
+                                    <expr>
+                                        <binary-operation-expression start-index="178" stop-index="218">
+                                            <left>
+                                                <column name="department_id" start-index="178" stop-index="192">
+                                                    <owner name="x" start-index="178" stop-index="178"/>
+                                                </column>
+                                            </left>
+                                            <operator>=</operator>
+                                            <right>
+                                                <column name="department_id" start-index="196" stop-index="218">
+                                                    <owner name="employees" start-index="196" stop-index="204"/>
+                                                </column>
+                                            </right>
+                                        </binary-operation-expression>
+                                    </expr>
+                                </where>
+                            </select>
+                        </subquery>
+                    </right>
+                </in-expression>
+            </expr>
+        </having>
+        <order-by>
+            <column-item name="department_id" start-index="230" stop-index="242" />
+        </order-by>
+    </select>
 </sql-parser-test-cases>

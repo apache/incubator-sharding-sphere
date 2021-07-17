@@ -421,7 +421,7 @@ aggregationFunction
     ;
 
 aggregationFunctionName
-    : MAX | MIN | SUM | COUNT | AVG
+    : MAX | MIN | SUM | COUNT | AVG | GROUPING
     ;
 
 distinct
@@ -445,7 +445,7 @@ regularFunction
     ;
 
 regularFunctionName
-    : identifier | IF | LOCALTIME | LOCALTIMESTAMP | INTERVAL
+    : identifier | IF | LOCALTIME | LOCALTIMESTAMP | INTERVAL | DECODE
     ;
 
 caseExpression

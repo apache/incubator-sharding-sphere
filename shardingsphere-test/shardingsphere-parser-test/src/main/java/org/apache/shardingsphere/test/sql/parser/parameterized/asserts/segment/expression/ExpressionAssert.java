@@ -33,6 +33,7 @@ import org.apache.shardingsphere.sql.parser.sql.common.segment.dml.expr.simple.L
 import org.apache.shardingsphere.sql.parser.sql.common.segment.dml.expr.simple.ParameterMarkerExpressionSegment;
 import org.apache.shardingsphere.sql.parser.sql.common.segment.dml.expr.subquery.SubqueryExpressionSegment;
 import org.apache.shardingsphere.sql.parser.sql.common.segment.dml.expr.subquery.SubquerySegment;
+import org.apache.shardingsphere.sql.parser.sql.common.segment.dml.item.AggregationProjectionSegment;
 import org.apache.shardingsphere.sql.parser.sql.common.segment.dml.item.ExpressionProjectionSegment;
 import org.apache.shardingsphere.test.sql.parser.parameterized.asserts.SQLCaseAssertContext;
 import org.apache.shardingsphere.test.sql.parser.parameterized.asserts.segment.SQLSegmentAssert;
@@ -328,6 +329,9 @@ public final class ExpressionAssert {
         } else if (actual instanceof ExpressionProjectionSegment) {
             ProjectionAssert.assertProjection(assertContext,
                     (ExpressionProjectionSegment) actual, expected.getExpressionProjection());
+        } else if (actual instanceof AggregationProjectionSegment) {
+            ProjectionAssert.assertProjection(assertContext,
+                    (AggregationProjectionSegment) actual, expected.getAggregationProjection());
         } else {
             throw new UnsupportedOperationException(
                     String.format("Unsupported expression  : %s.", actual.getClass().getName()));

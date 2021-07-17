@@ -3163,5 +3163,19 @@
             <shorthand-projection start-index="7" stop-index="7" />
         </projections>
     </select>
+
+    <select sql-case-id="select_with_hierarchical_connect_by">
+        <from>
+            <simple-table name="employees" start-index="47" stop-index="55" />
+        </from>
+        <projections start-index="7" stop-index="40">
+            <column-projection name="last_name" start-index="7" stop-index="15"/>
+            <column-projection name="employee_id" start-index="18" stop-index="28"/>
+            <column-projection name="manager_id" start-index="31" stop-index="40"/>
+        </projections>
+        <order-by>
+            <column-item name="last_name" start-index="102" stop-index="110" />
+        </order-by>
+    </select>
 </sql-parser-test-cases>
 

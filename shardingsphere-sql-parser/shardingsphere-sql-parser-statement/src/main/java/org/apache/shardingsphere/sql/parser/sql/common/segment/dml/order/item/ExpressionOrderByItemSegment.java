@@ -40,6 +40,11 @@ public final class ExpressionOrderByItemSegment extends TextOrderByItemSegment {
         this.expression = expression;
     }
     
+    public ExpressionOrderByItemSegment(final int startIndex, final int stopIndex, final String expression) {
+        super(startIndex, stopIndex, OrderDirection.ASC, OrderDirection.ASC);
+        this.expression = expression;
+    }
+    
     @Override
     public String getText() {
         return expression;

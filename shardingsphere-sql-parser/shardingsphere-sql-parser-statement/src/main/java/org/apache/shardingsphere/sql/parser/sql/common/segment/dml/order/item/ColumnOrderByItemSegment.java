@@ -41,6 +41,11 @@ public final class ColumnOrderByItemSegment extends TextOrderByItemSegment {
         this.column = column;
     }
     
+    public ColumnOrderByItemSegment(final ColumnSegment column) {
+        super(column.getStartIndex(), column.getStopIndex(), OrderDirection.ASC, OrderDirection.ASC);
+        this.column = column;
+    }
+    
     @Override
     public String getText() {
         return column.getQualifiedName();
