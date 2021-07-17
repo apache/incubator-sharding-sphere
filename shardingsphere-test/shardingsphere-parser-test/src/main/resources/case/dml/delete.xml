@@ -104,39 +104,39 @@
         </where>
     </delete>
 
-    <delete sql-case-id="delete_with_special_comments_return_without_sharding_value">
-        <table name="t_order" start-index="33" stop-index="39" />
-        <where start-index="41" stop-index="54">
-            <expr>
-                <binary-operation-expression start-index="47" stop-index="54">
-                    <left>
-                        <column name="status" start-index="47" stop-index="52" />
-                    </left>
-                    <operator>=</operator>
-                    <right>
-                        <literal-expression value="1" start-index="54" stop-index="54" />
-                    </right>
-                </binary-operation-expression>
-            </expr>
-        </where>
-    </delete>
+<!--    <delete sql-case-id="delete_with_special_comments_return_without_sharding_value">-->
+<!--        <table name="t_order" start-index="33" stop-index="39" />-->
+<!--        <where start-index="41" stop-index="54">-->
+<!--            <expr>-->
+<!--                <binary-operation-expression start-index="47" stop-index="54">-->
+<!--                    <left>-->
+<!--                        <column name="status" start-index="47" stop-index="52" />-->
+<!--                    </left>-->
+<!--                    <operator>=</operator>-->
+<!--                    <right>-->
+<!--                        <literal-expression value="1" start-index="54" stop-index="54" />-->
+<!--                    </right>-->
+<!--                </binary-operation-expression>-->
+<!--            </expr>-->
+<!--        </where>-->
+<!--    </delete>-->
 
-    <delete sql-case-id="delete_with_special_comments_returning_without_sharding_value">
-        <table name="t_order" start-index="34" stop-index="40" />
-        <where start-index="43" stop-index="56">
-            <expr>
-                <binary-operation-expression start-index="49" stop-index="56">
-                    <left>
-                        <column name="status" start-index="49" stop-index="54" />
-                    </left>
-                    <operator>=</operator>
-                    <right>
-                        <literal-expression value="1" start-index="56" stop-index="56" />
-                    </right>
-                </binary-operation-expression>
-            </expr>
-        </where>
-    </delete>
+<!--    <delete sql-case-id="delete_with_special_comments_returning_without_sharding_value">-->
+<!--        <table name="t_order" start-index="34" stop-index="40" />-->
+<!--        <where start-index="43" stop-index="56">-->
+<!--            <expr>-->
+<!--                <binary-operation-expression start-index="49" stop-index="56">-->
+<!--                    <left>-->
+<!--                        <column name="status" start-index="49" stop-index="54" />-->
+<!--                    </left>-->
+<!--                    <operator>=</operator>-->
+<!--                    <right>-->
+<!--                        <literal-expression value="1" start-index="56" stop-index="56" />-->
+<!--                    </right>-->
+<!--                </binary-operation-expression>-->
+<!--            </expr>-->
+<!--        </where>-->
+<!--    </delete>-->
 
     <delete sql-case-id="delete_with_alias" parameters="'init'">
         <table name="t_order" alias="o" start-index="12" stop-index="23" />
@@ -152,6 +152,38 @@
                         <parameter-marker-expression value="0" start-index="38" stop-index="38" />
                     </right>
                 </binary-operation-expression>
+            </expr>
+        </where>
+    </delete>
+
+    <delete sql-case-id="delete_with_alias_without_as">
+        <table name="product_price_history" alias="pp" start-index="7" stop-index="30" />
+        <where start-index="32" stop-index="211">
+            <expr>
+                <in-expression start-index="38" stop-index="211">
+                    <not>false</not>
+                    <left>
+                        <common-expression text="(product_id,currency_code,effective_from_date)" start-index="38" stop-index="85"/>
+                    </left>
+                    <right>
+                        <subquery start-index="90" stop-index="211">
+                            <select>
+                                <from start-index="155" stop-index="175">
+                                    <simple-table name="product_price_history" start-index="155" stop-index="175"/>
+                                </from>
+                                <projections start-index="98" stop-index="148">
+                                    <column-projection name="product_id" start-index="98" stop-index="107"/>
+                                    <column-projection name="currency_code" start-index="110" stop-index="122"/>
+                                    <aggregation-projection type="MAX" inner-expression="(effective_from_date)" start-index="125" stop-index="148" />
+                                </projections>
+                                <group-by>
+                                    <column-item name="product_id" start-index="186" stop-index="195" />
+                                    <column-item name="currency_code" start-index="198" stop-index="210" />
+                                </group-by>
+                            </select>
+                        </subquery>
+                    </right>
+                </in-expression>
             </expr>
         </where>
     </delete>
@@ -513,5 +545,175 @@
                 </binary-operation-expression>
             </expr>
         </where>
+    </delete>
+
+    <delete sql-case-id="delete_with_simple_table">
+        <table name="product_descriptions" start-index="12" stop-index="31" />
+        <where start-index="33" stop-index="56">
+            <expr>
+                <binary-operation-expression start-index="39" stop-index="56">
+                    <left>
+                        <column name="language_id" start-index="39" stop-index="49" />
+                    </left>
+                    <operator>=</operator>
+                    <right>
+                        <literal-expression value="AR" start-index="53" stop-index="56" />
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </where>
+    </delete>
+
+    <delete sql-case-id="delete_with_simple_subquery">
+        <subquery-table>
+            <subquery>
+                <select>
+                    <from start-index="27" stop-index="35">
+                        <simple-table name="employees" start-index="27" stop-index="35"/>
+                    </from>
+                    <projections start-index="20" stop-index="20">
+                        <shorthand-projection start-index="20" stop-index="20"/>
+                    </projections>
+                </select>
+            </subquery>
+        </subquery-table>
+        <where start-index="38" stop-index="85">
+            <expr>
+                <binary-operation-expression start-index="44" stop-index="85">
+                    <left>
+                        <binary-operation-expression start-index="44" stop-index="60">
+                            <left>
+                                <column name="job_id" start-index="44" stop-index="49"/>
+                            </left>
+                            <operator>=</operator>
+                            <right>
+                                <literal-expression value="SA_REP" start-index="53" stop-index="60"/>
+                            </right>
+                        </binary-operation-expression>
+                    </left>
+                    <operator>AND</operator>
+                    <right>
+                        <binary-operation-expression start-index="66" stop-index="85">
+                            <left>
+                                <column name="commission_pct" start-index="66" stop-index="79"/>
+                            </left>
+                            <operator>&lt;</operator>
+                            <right>
+                                <literal-expression value="0.2" start-index="83" stop-index="85"/>
+                            </right>
+                        </binary-operation-expression>
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </where>
+    </delete>
+
+    <delete sql-case-id="delete_with_simple_subquery_without_from">
+        <subquery-table>
+            <subquery>
+                <select>
+                    <from start-index="27" stop-index="35">
+                        <simple-table name="product_price_history" start-index="22" stop-index="42"/>
+                    </from>
+                    <projections start-index="15" stop-index="15">
+                        <shorthand-projection start-index="15" stop-index="15"/>
+                    </projections>
+                </select>
+            </subquery>
+        </subquery-table>
+        <where start-index="45" stop-index="71">
+            <expr>
+                <binary-operation-expression start-index="51" stop-index="71">
+                    <left>
+                        <column name="currency_code" start-index="51" stop-index="63"/>
+                    </left>
+                    <operator>=</operator>
+                    <right>
+                        <literal-expression value="EUR" start-index="67" stop-index="71"/>
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </where>
+    </delete>
+
+    <delete sql-case-id="delete_with_remote_database_table">
+        <table name="locations" start-index="12" stop-index="23">
+            <owner name="hr" start-index="12" stop-index="13" />
+        </table>
+        <where start-index="32" stop-index="55">
+            <expr>
+                <binary-operation-expression start-index="38" stop-index="55">
+                    <left>
+                        <column name="location_id" start-index="38" stop-index="48" />
+                    </left>
+                    <operator>&gt;</operator>
+                    <right>
+                        <literal-expression value="3000" start-index="52" stop-index="55" />
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </where>
+    </delete>
+
+    <delete sql-case-id="delete_with_returning_into">
+        <table name="employees" start-index="12" stop-index="20" />
+        <where start-index="22" stop-index="93">
+            <expr>
+                <binary-operation-expression start-index="28" stop-index="93">
+                    <left>
+                        <binary-operation-expression start-index="28" stop-index="44">
+                            <left>
+                                <column name="job_id" start-index="28" stop-index="33"/>
+                            </left>
+                            <operator>=</operator>
+                            <right>
+                                <literal-expression value="SA_REP" start-index="37" stop-index="44"/>
+                            </right>
+                        </binary-operation-expression>
+                    </left>
+                    <operator>AND</operator>
+                    <right>
+                        <binary-operation-expression start-index="50" stop-index="93">
+                            <left>
+                                <binary-operation-expression start-index="50" stop-index="83">
+                                    <left>
+                                        <column name="hire_date" start-index="50" stop-index="58"/>
+                                    </left>
+                                    <operator>+</operator>
+                                    <right>
+                                        <expression-projection text="TO_YMINTERVAL('01-00')" start-index="62" stop-index="83"/>
+                                    </right>
+                                </binary-operation-expression>
+                            </left>
+                            <operator>&lt;</operator>
+                            <right>
+                                <column name="SYSDATE" start-index="87" stop-index="93"/>
+                            </right>
+                        </binary-operation-expression>
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </where>
+    </delete>
+
+    <delete sql-case-id="delete_with_partition">
+        <table name="sales" start-index="12" stop-index="16" />
+        <where start-index="44" stop-index="67">
+            <expr>
+                <binary-operation-expression start-index="50" stop-index="67">
+                    <left>
+                        <column name="amount_sold" start-index="50" stop-index="60" />
+                    </left>
+                    <operator>&gt;</operator>
+                    <right>
+                        <literal-expression value="1000" start-index="64" stop-index="67" />
+                    </right>
+                </binary-operation-expression>
+            </expr>
+        </where>
+    </delete>
+
+    <delete sql-case-id="delete_with_table">
+        <table name="product_price_history" start-index="7" stop-index="27" />
     </delete>
 </sql-parser-test-cases>

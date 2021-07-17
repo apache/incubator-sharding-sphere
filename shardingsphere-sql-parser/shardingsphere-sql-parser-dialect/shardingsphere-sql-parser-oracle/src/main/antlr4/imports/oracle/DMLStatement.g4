@@ -114,23 +114,12 @@ assignmentValue
     ;
 
 delete
-    : DELETE deleteSpecification? (singleTableClause | multipleTablesClause) whereClause?
+    : DELETE hint? FROM? deleteSpecification alias? whereClause? returningClause? errorLoggingClause?
     ;
 
 deleteSpecification
-    : ONLY
-    ;
-
-singleTableClause
-    : FROM? LP_? tableName RP_? (AS? alias)?
-    ;
-
-multipleTablesClause
-    : multipleTableNames FROM tableReferences | FROM multipleTableNames USING tableReferences
-    ;
-
-multipleTableNames
-    : tableName DOT_ASTERISK_? (COMMA_ tableName DOT_ASTERISK_?)*
+    : dmlTableExprClause
+    | ONLY LP_ dmlTableExprClause RP_
     ;
 
 select
